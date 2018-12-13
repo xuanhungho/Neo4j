@@ -1,13 +1,10 @@
 package Controller;
 
-import java.util.Calendar;
+import java.util.Calendar; 
 import java.util.Date; 
 import java.util.Random;
-
-import Data.Connection;
 import Data.DataExample;
 import Model.Organization;
-import Model.Person;
 
 public class CreateOrganization {
 //	public Organization randomOrganization() {
@@ -61,7 +58,6 @@ public class CreateOrganization {
 		long begin = Calendar.getInstance().getTimeInMillis();
 		Organization Org = new Organization();
 		try {
-			ConnectionDB cn = new ConnectionDB(Connection.host,Connection.username,Connection.password);
 			
 			for(int i=0; i<num; i++) {	
 				Org.setNhan(randomNhan());
@@ -71,21 +67,15 @@ public class CreateOrganization {
 				Org.setDate(randomThoiGian());
 				Org.setTruSo(randomTruSo());
 				
-		cn.execute("CREATE ("+Org.getDinhdanh()+":Organization { "
+				ConnectionDB.cn.execute("CREATE ("+Org.getDinhdanh()+":Organization { "
 					+ "DinhDanh: '"+Org.getDinhdanh()+"', "
 					+ "Nhan: '"+Org.getNhan()+"', "
 					+ "Mota: '"+Org.getMota()+"', "
 					+ "LinkTrichRut: '"+Org.getLink()+"', "			
 					+ "ThoiGianTrichRut: '"+Org.getDate()+"', "
 					+ "TruSo: '"+Org.getTruSo()+"'})");
-		System.out.println("Da them "+Org.getDinhdanh()+"!");
+		System.out.println("Da them Org "+Org.getDinhdanh()+"!");
 		}	
-			try {
-				cn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
 			long end = Calendar.getInstance().getTimeInMillis();
 			System.out.println("Thời gian thực hiện: " + (end - begin)+" mili giây!");
 			

@@ -1,13 +1,9 @@
 package Controller;
 
-import java.util.Calendar;
+import java.util.Calendar; 
 import java.util.Date;
 import java.util.Random;
-
-import Data.Connection;
 import Data.DataExample;
-import Model.Country;
-import Model.Time;
 import Model.Time;
 
 public class CreateTime{
@@ -45,15 +41,14 @@ public class CreateTime{
 		Time Time = new Time();
 
 		try {
-			ConnectionDB cn = new ConnectionDB(Connection.host,Connection.username,Connection.password);
-			for(int i=0; i<num; i++) {	
+				for(int i=0; i<num; i++) {	
 				Time.setNhan(randomNhan());
 				Time.setDinhdanh(randomDinhDanh(i));
 				Time.setMota(randomMoTa());
 				Time.setLink(randomLink());
 				Time.setDate(randomThoiGian());
 
-		cn.execute("CREATE ("+Time.getDinhdanh()+":Time { "
+				ConnectionDB.cn.execute("CREATE ("+Time.getDinhdanh()+":Time { "
 					+ "DinhDanh: '"+Time.getDinhdanh()+"', "
 					+ "Nhan: '"+Time.getNhan()+"', "
 					+ "Mota: '"+Time.getMota()+"', "
@@ -61,12 +56,7 @@ public class CreateTime{
 					+ "ThoiGianTrichRut: '"+Time.getDate()+"'})");
 		System.out.println("Da them "+Time.getDinhdanh()+"!");
 		}	
-			try {
-				cn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
+		
 			long end = Calendar.getInstance().getTimeInMillis();
 			System.out.println("Thời gian thực hiện: " + (end - begin)+" mili giây!");
 			

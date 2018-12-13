@@ -1,6 +1,5 @@
 package Controller;
 
-import Data.Connection;
 import Data.DataExample;
 
 public class CreateRelationships {
@@ -14,37 +13,31 @@ public class CreateRelationships {
 	public CreateRelationships() {
 	}
 	
-	public void CreateRelationships() {
+	public void CreateRelationship() {
 		DataExample  data = new DataExample();
-		try {
-			ConnectionDB cn = new ConnectionDB(Connection.host,Connection.username,Connection.password);
-			
+		try {		
 			for(int i=0; i<data.link.length; i++) {	
 				String linkid = LinkID(data.link[i]);
-				cn.execute("CREATE ("+linkid+":Link { "
+				ConnectionDB.cn.execute("CREATE ("+linkid+":Link { "
 					+ "Link: '"+data.link[i]+"', "			
 					+ "LinhID: '"+linkid+"'})");
 				System.out.println("Da them "+linkid+"!");
 			}	
 			
-			cn.execute("MATCH (per:Person),(lk:Link) WHERE per.LinkTrichRut = lk.Link\r\n" + 
+			ConnectionDB.cn.execute("MATCH (per:Person),(lk:Link) WHERE per.LinkTrichRut = lk.Link\r\n" + 
 					"CREATE (per)-[:TRICH_RUT_TU]->(lk)");
-			cn.execute("MATCH (org:Organization),(lk:Link) WHERE org.LinkTrichRut = lk.Link\r\n" + 
+			ConnectionDB.cn.execute("MATCH (org:Organization),(lk:Link) WHERE org.LinkTrichRut = lk.Link\r\n" + 
 					"CREATE (org)-[:TRICH_RUT_TU]->(lk)");
-			cn.execute("MATCH (loca:Location),(lk:Link) WHERE loca.LinkTrichRut = lk.Link\r\n" + 
+			ConnectionDB.cn.execute("MATCH (loca:Location),(lk:Link) WHERE loca.LinkTrichRut = lk.Link\r\n" + 
 					"CREATE (loca)-[:TRICH_RUT_TU]->(lk)");
-			cn.execute("MATCH (event:Event),(lk:Link) WHERE event.LinkTrichRut = lk.Link\r\n" + 
+			ConnectionDB.cn.execute("MATCH (event:Event),(lk:Link) WHERE event.LinkTrichRut = lk.Link\r\n" + 
 					"CREATE (event)-[:TRICH_RUT_TU]->(lk)");
-			cn.execute("MATCH (time:Time),(lk:Link) WHERE time.LinkTrichRut = lk.Link\r\n" + 
+			ConnectionDB.cn.execute("MATCH (time:Time),(lk:Link) WHERE time.LinkTrichRut = lk.Link\r\n" + 
 					"CREATE (time)-[:TRICH_RUT_TU]->(lk)");
-			cn.execute("MATCH (country:Country),(lk:Link) WHERE country.LinkTrichRut = lk.Link\r\n" + 
+			ConnectionDB.cn.execute("MATCH (country:Country),(lk:Link) WHERE country.LinkTrichRut = lk.Link\r\n" + 
 					"CREATE (country)-[:TRICH_RUT_TU]->(lk)");
 			
-			try {
-				cn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-				}
+			
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 		}

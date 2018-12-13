@@ -1,12 +1,8 @@
 package Controller;
 
-import java.util.Calendar;
+import java.util.Calendar; 
 import java.util.Date; 
 import java.util.Random;
-
-import javax.management.loading.PrivateClassLoader;
-
-import Data.Connection;
 import Data.DataExample;
 import Model.Location;
 
@@ -62,8 +58,7 @@ public class CreateLocation{
 		long begin = Calendar.getInstance().getTimeInMillis();
 		Location Location = new Location();
 		try {
-			ConnectionDB cn = new ConnectionDB(Connection.host,Connection.username,Connection.password);
-			
+	
 			for(int i=0; i<num; i++) {	
 				Location.setNhan(randomNhan());
 				Location.setDinhdanh(randomDinhDanh(i));
@@ -72,7 +67,7 @@ public class CreateLocation{
 				Location.setDate(randomThoiGian());
 				Location.setQuocGia(randomQuocGia());
 				
-		cn.execute("CREATE ("+Location.getDinhdanh()+":Location { "
+				ConnectionDB.cn.execute("CREATE ("+Location.getDinhdanh()+":Location { "
 					+ "DinhDanh: '"+Location.getDinhdanh()+"', "
 					+ "Nhan: '"+Location.getNhan()+"', "
 					+ "Mota: '"+Location.getMota()+"', "
@@ -81,11 +76,6 @@ public class CreateLocation{
 					+ "QuocGia: '"+Location.getQuocGia()+"'})");
 		System.out.println("Da them "+Location.getDinhdanh()+"!");
 		}	
-			try {
-				cn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 			
 			long end = Calendar.getInstance().getTimeInMillis();
 			System.out.println("Thời gian thực hiện: " + (end - begin)+" mili giây!");

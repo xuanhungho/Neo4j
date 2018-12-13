@@ -1,13 +1,10 @@
 package Controller;
 
-import java.util.Calendar;
+import java.util.Calendar; 
 import java.util.Date; 
 import java.util.Random;
-
-import Data.Connection;
 import Data.DataExample;
 import Model.Event;
-import Model.Location;
 
 public class CreateEvent{
 	
@@ -78,9 +75,7 @@ public class CreateEvent{
 	public void CreateNodeEvent(int num) {
 		long begin = Calendar.getInstance().getTimeInMillis();
 		Event Event = new Event();
-		try {
-			ConnectionDB cn = new ConnectionDB(Connection.host,Connection.username,Connection.password);
-			
+		try {			
 			for(int i=0; i<num; i++) {	
 				Event.setNhan(randomNhan());
 				Event.setDinhdanh(randomDinhDanh(i));
@@ -91,7 +86,7 @@ public class CreateEvent{
 				Event.setDiadiem(randomDiaDiem());
 				Event.setTime(randomTime());
 				
-		cn.execute("CREATE ("+Event.getDinhdanh()+":Event { "
+				ConnectionDB.cn.execute("CREATE ("+Event.getDinhdanh()+":Event { "
 					+ "Nhan: '"+Event.getNhan()+"', "
 					+ "DinhDanh: '"+Event.getDinhdanh()+"', "
 					+ "Mota: '"+Event.getMota()+"', "
@@ -103,11 +98,6 @@ public class CreateEvent{
 		
 		System.out.println("Da them "+Event.getDinhdanh()+"!");
 		}	
-			try {
-				cn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 			
 			long end = Calendar.getInstance().getTimeInMillis();
 			System.out.println("Thời gian thực hiện: " + (end - begin)+" mili giây!");

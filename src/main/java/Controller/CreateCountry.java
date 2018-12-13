@@ -1,29 +1,16 @@
 package Controller;
 
-import java.util.Calendar;
+import java.util.Calendar; 
 import java.util.Date;
 import java.util.Random;
-
-import Data.Connection;
 import Data.DataExample;
 import Model.Country;
-import Model.Location;
 
 public class CreateCountry{
 	
 	public String Tempid;
 	
 	DataExample data = new DataExample();
-	
-//	public Country randomCountry() {
-//		Country Country = new Country();
-//		Country.setNhan(randomNhan());
-//		Country.setMota(randomMoTa());
-//		Country.setLink(randomLink());
-//		Country.setDate(randomThoiGian());
-//		Country.setDinhdanh(randomDinhDanh());
-//		return Country;
-//	}
 
 	public String randomNhan() {
 		String nhan = null ;
@@ -63,9 +50,7 @@ public class CreateCountry{
 	public void CreateNodeCountry(int num) {
 		long begin = Calendar.getInstance().getTimeInMillis();
 		Country Country = new Country();
-		try {
-			ConnectionDB cn = new ConnectionDB(Connection.host,Connection.username,Connection.password);
-			
+		try {		
 			for(int i=0; i<num; i++) {	
 				Country.setNhan(randomNhan());
 				Country.setDinhdanh(randomDinhDanh(i));
@@ -73,7 +58,7 @@ public class CreateCountry{
 				Country.setLink(randomLink());
 				Country.setDate(randomThoiGian());
 				
-		cn.execute("CREATE ("+Country.getDinhdanh()+":Country { "
+				ConnectionDB.cn.execute("CREATE ("+Country.getDinhdanh()+":Country { "
 					+ "DinhDanh: '"+Country.getDinhdanh()+"', "
 					+ "Nhan: '"+Country.getNhan()+"', "
 					+ "Mota: '"+Country.getMota()+"', "
@@ -81,11 +66,6 @@ public class CreateCountry{
 					+ "ThoiGianTrichRut: '"+Country.getDate()+"'})");
 		System.out.println("Da them "+Country.getDinhdanh()+"!");
 		}	
-			try {
-				cn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 			
 			long end = Calendar.getInstance().getTimeInMillis();
 			System.out.println("Thời gian thực hiện: " + (end - begin)+" mili giây!");

@@ -1,10 +1,8 @@
 package Controller;
 
-import java.util.Calendar;
+import java.util.Calendar; 
 import java.util.Date; 
 import java.util.Random;
-
-import Data.Connection;
 import Data.DataExample;
 import Model.Person;
 
@@ -87,8 +85,6 @@ public class CreatePerson{
 		Person Person = new Person();
 
 		try {
-			ConnectionDB cn = new ConnectionDB(Connection.host,Connection.username,Connection.password);
-			
 			for(int i=0; i<num; i++) {	
 				Person.setNhan(randomNhan());
 				Person.setDinhdanh(randomDinhDanh(i));
@@ -99,7 +95,7 @@ public class CreatePerson{
 				Person.setJob(randomJob());
 				Person.setQuoctich(randomQuocTich());
 
-		cn.execute("CREATE ("+Person.getDinhdanh()+":Person { "
+		ConnectionDB.cn.execute("CREATE ("+Person.getDinhdanh()+":Person { "
 					+ "DinhDanh: '"+Person.getDinhdanh()+"', "
 					+ "Nhan: '"+Person.getNhan()+"', "
 					+ "Mota: '"+Person.getMota()+"', "
@@ -110,12 +106,6 @@ public class CreatePerson{
 					+ "Quoctich: '"+Person.getQuoctich()+"'})");
 		System.out.println("Da them "+Person.getDinhdanh()+"!");
 		}	
-			try {
-				cn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
 			long end = Calendar.getInstance().getTimeInMillis();
 			System.out.println("Thời gian thực hiện: " + (end - begin)+" mili giây!");
 			
