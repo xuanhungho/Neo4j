@@ -1,0 +1,23 @@
+package Model;
+
+import java.sql.Date;
+
+public class Location extends Thucthe {
+	 private String quocgia;
+	 
+	public Location() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Location(String dinhdanh, String nhan, String mota, String link, Date thoigian,String quocgia) {
+		super(dinhdanh, nhan, mota, link, thoigian);
+		// TODO Auto-generated constructor stub
+		this.quocgia=quocgia;
+	}
+	public String getQuocGia() {
+		 return this.quocgia;
+	 }
+	 public void setQuocGia(String qg) {
+		 this.quocgia=qg;
+	 }
+}
