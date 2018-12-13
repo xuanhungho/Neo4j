@@ -25,7 +25,7 @@ public class DataExample {
 		public  String[] location = {"Cung văn hoá hữa nghị Việt - Xô","Toà nhà FPT Cầu Giấy","Lầu năm góc","Trụ sở Apple Califonia","Hồ Thiên Nga"};
 		
 		//Organization
-		public  String[] nameOrganization = {"Apple","BKSoftware","Bphone","VinFast","Grap"};
+		public  String[] nameOrganization = {"Apple","BKSoftware","Bphone","VinFast","Grab"};
 		public  String[] descriptionOrganization = {"phone","software","phone","car","taxi"};
 		
 	}

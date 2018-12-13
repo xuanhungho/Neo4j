@@ -10,16 +10,19 @@ import Model.Person;
 
 public class CreatePerson{
 	
+	private String Tempid;
 	DataExample data = new DataExample();
 	
 	public String lastName() {
-		String firsrname = null ;
-		firsrname = data.lastName[new Random().nextInt(data.lastName.length)];
-		return firsrname;
+		String lastName = null ;
+		lastName = data.lastName[new Random().nextInt(data.lastName.length)];
+		this.Tempid = lastName;
+		return lastName;
 	}
+	
 	public String randomDinhDanh(int id) {
 		String nhan = null ;
-		nhan = lastName() + id;
+		nhan = this.Tempid + id;
 		return nhan;
 	}
 
@@ -78,30 +81,30 @@ public class CreatePerson{
 //		Person.setQuoctich(randomQuocTich());
 //		return Person;
 //	}
-//	
+
 	public void CreateNodePerson(int num) {
 		long begin = Calendar.getInstance().getTimeInMillis();
 		Person Person = new Person();
-		String temid = null;
+
 		try {
 			ConnectionDB cn = new ConnectionDB(Connection.host,Connection.username,Connection.password);
-			cn.removeData();
+			
 			for(int i=0; i<num; i++) {	
+				Person.setNhan(randomNhan());
 				Person.setDinhdanh(randomDinhDanh(i));
 				Person.setMota(randomMoTa());
 				Person.setLink(randomLink());
 				Person.setDate(randomThoiGian());
 				Person.setAge(randomAge());
-				Person.setNhan(randomNhan());
 				Person.setJob(randomJob());
 				Person.setQuoctich(randomQuocTich());
-				temid = Person.getDinhdanh();
+
 		cn.execute("CREATE ("+Person.getDinhdanh()+":Person { "
 					+ "DinhDanh: '"+Person.getDinhdanh()+"', "
 					+ "Nhan: '"+Person.getNhan()+"', "
 					+ "Mota: '"+Person.getMota()+"', "
-					+ "Link: '"+Person.getLink()+"', "			
-					+ "ThoiGian: '"+Person.getDate()+"', "
+					+ "LinkTrichRut: '"+Person.getLink()+"', "			
+					+ "ThoiGianTrichRut: '"+Person.getDate()+"', "
 					+ "Age: '"+Person.getAge()+"', "
 					+ "Job: '"+Person.getJob()+"', "
 					+ "Quoctich: '"+Person.getQuoctich()+"'})");

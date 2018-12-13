@@ -1,37 +1,49 @@
 package View;
-import java.util.Calendar; 
+
+import java.util.Calendar;
 
 import Controller.ConnectionDB;
-import Controller.Create;
+import Controller.CreateCountry;
+import Controller.CreateEvent;
+import Controller.CreateLocation;
+import Controller.CreateOrganization;
 import Controller.CreatePerson;
+import Controller.CreateTime;
 import Data.Connection;
-import Model.Person;
-import Data.DataExample;
 
 public class main {
-
+	public static int num = 4;
 	public static void main(String[] args) {
-
-		DataExample data = new DataExample();
-		CreatePerson a = new CreatePerson();
-	try {
-		ConnectionDB con = new ConnectionDB(Connection.host,Connection.username,Connection.password);
-		con.removeData();
-		for (int i=0;i<data.link.length;i++) {
-			con.execute("CREATE(Link"+i+":Link{Link: '"+data.link[i]+"'})");
-			con.execute(" RETURN a ");
-			con.execute("MATCH (b:Link) WHERE b.Link = a.Link RETURN b ");
-			con.execute("CREATE(a)-[:XUAT_HIEN_TRONG]->(b)");
-			}
 		try {
-			con.close();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	} catch (Exception e) {
-		System.out.println(e.getMessage());
-	}
-		a.CreateNodePerson(20);
+			ConnectionDB cn = new ConnectionDB(Connection.host,Connection.username,Connection.password);
+			cn.removeData();
+			try {
+				cn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				}
+		
+		CreatePerson per = new CreatePerson();
+		per.CreateNodePerson(num);
+		
+		CreateOrganization Org = new CreateOrganization();
+		Org.CreateNodeOrganization(num);
+		
+		CreateLocation location = new CreateLocation();
+		location.CreateNodeLocation(num);
+		
+		CreateEvent event = new CreateEvent();
+		event.CreateNodeEvent(num);
+		
+		CreateCountry country = new CreateCountry();
+		country.CreateNodeCountry(num);
+		
+		CreateTime time = new CreateTime();
+		time.CreateNodeTime(num);
+		
+		System.out.println("Done!");
 	}
 }
