@@ -1,7 +1,5 @@
 package Controller;
-
-import Data.DataExample;
-
+ 
 public class CreateRelationships {
 
 	public CreateRelationships() {

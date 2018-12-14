@@ -22,7 +22,6 @@ public class DataExample {
 				
 				};
 		public  String[] job = {"Giao vien","Tho dien","Cong nhan","Sinh vien","Ky su"};
-		public  String[] time = {"20-10-1998","21-12-1999","12-7-2017","21-4-2016"};
 		
 		//Country
 		public  String[] quoctich = {"Viet Nam","Lao","Campuchia","Nga","My","Anh","Duc","Phap","Nhat"};
@@ -35,8 +34,8 @@ public class DataExample {
 		public  String[] location = {"Cung văn hoá hữa nghị Việt - Xô","Toà nhà FPT Cầu Giấy","Lầu năm góc","Trụ sở Apple Califonia","Hồ Thiên Nga"};
 		
 		//Organization
-		public  String[] nameOrganization = {"Apple","BKSoftware","Bphone","VinFast","Grab"};
-		public  String[] descriptionOrganization = {"phone","software","phone","car","taxi"};
+		public  String[] nameOrganization = {"Apple","BKSoftware","Bphone","VinFast","Grab","Foody","FPT"};
+		public  String[] descriptionOrganization = {"phone","software","phone","car","taxi","IT","Transporting"};
 		
 	}
 
