@@ -43,9 +43,10 @@ public class CreateEvent{
 		return link;
 	}
 	
-	public Date randomThoiGian() {
-		Date date = new Date();
-		return date;
+	public Date randomThoiGian(int i) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -i);
+		return calendar.getTime();
 	}
 	
 	public String randomDinhDanh(int i) {
@@ -81,7 +82,7 @@ public class CreateEvent{
 				Event.setDinhdanh(randomDinhDanh(i));
 				Event.setMota(randomMoTa());
 				Event.setLink(randomLink());
-				Event.setDate(randomThoiGian());
+				Event.setDate(randomThoiGian(i));
 				Event.setDaidientochuc(randomDaiDien());
 				Event.setDiadiem(randomDiaDiem());
 				Event.setTime(randomTime());

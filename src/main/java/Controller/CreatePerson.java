@@ -1,7 +1,7 @@
 package Controller;
 
-import java.util.Calendar; 
-import java.util.Date; 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import Data.DataExample;
 import Model.Person;
@@ -38,9 +38,10 @@ public class CreatePerson{
 	}
 	
 	
-	public Date randomThoiGian() {
-		Date date = new Date();
-		return date;
+	public Date randomThoiGian(int i) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -i);
+		return calendar.getTime();
 	}
 	
 	public String randomNhan() {
@@ -67,19 +68,6 @@ public class CreatePerson{
 		return qt;
 	}
 	
-//	public Person randomPerson(int id) {
-//		Person Person = new Person();
-//		Person.setNhan(randomDinhDanh(id));
-//		Person.setMota(randomMoTa());
-//		Person.setLink(randomLink());
-//		Person.setDate(randomThoiGian());
-//		Person.setAge(randomAge());
-//		Person.setDinhdanh(randomNhan());
-//		Person.setJob(randomJob());
-//		Person.setQuoctich(randomQuocTich());
-//		return Person;
-//	}
-
 	public void CreateNodePerson(int num) {
 		long begin = Calendar.getInstance().getTimeInMillis();
 		Person Person = new Person();
@@ -90,7 +78,7 @@ public class CreatePerson{
 				Person.setDinhdanh(randomDinhDanh(i));
 				Person.setMota(randomMoTa());
 				Person.setLink(randomLink());
-				Person.setDate(randomThoiGian());
+				Person.setDate(randomThoiGian(i));
 				Person.setAge(randomAge());
 				Person.setJob(randomJob());
 				Person.setQuoctich(randomQuocTich());

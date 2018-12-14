@@ -7,7 +7,7 @@ public class Thucthe {
 	 private String nhan;
 	 private String mota;
 	 private String link;
-	 private Date thoigian ;
+	 private Date thoigian;
 	 
 	 public Thucthe() {
 	 } 
@@ -45,8 +45,8 @@ public class Thucthe {
 	public void setLink(String link) {
 		this.link = link;
 	}
-	public void setDate(Date thoigian) {
-		this.thoigian = thoigian;
+	public void setDate(Date date) {
+		this.thoigian = date;
 	}
 	public Date getDate() {
 		return thoigian;

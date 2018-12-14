@@ -35,11 +35,12 @@ public class TruyVanCoBan {
 	public void findPerson() {
     	System.out.println("Tất cả Person: ");
     	 try (Session session = ConnectionDB.cn.driver.session()){
-             StatementResult result = session.run("MATCH (e:Person) RETURN e.Nhan AS Nhan");
+             StatementResult result = session.run("MATCH (e:Person) RETURN e.Nhan AS Nhan, e.ThoiGianTrichRut AS Time");
              while (result.hasNext())
              {
                  Record record = result.next();
-                 System.out.println(record.get("Nhan").asString());
+                 System.out.println("Tên: "+record.get("Nhan").asString()+" - Thoi gian trich rut: "+record.get("Time").asString());
+                 
              }
          }
     }
@@ -60,7 +61,8 @@ public class TruyVanCoBan {
 	    }
 	
 	public void findPerson(String Quoctich) {
-    	String q = "MATCH (e:Person) WHERE e.Quoctich = {Quoctich} RETURN e.Nhan AS Nhan, e.Age AS Age, e.Mota AS Mota, e.Job AS Job";
+    	String q = "MATCH (e:Person) WHERE e.Quoctich = {Quoctich} RETURN e.Nhan AS Nhan, "
+    			+ "e.Age AS Age, e.Mota AS Mota, e.Job AS Job, e.ThoiGianTrichRut AS Time";
     	
     	 try (Session session = ConnectionDB.cn.driver.session()){
              StatementResult result = session.run(q,parameters("Quoctich", Quoctich));
@@ -72,12 +74,14 @@ public class TruyVanCoBan {
                  System.out.println("Tuổi: "+record.get("Age").asString());
                  System.out.println("Nghề nghiệp: "+record.get("Job").asString());
                  System.out.println("SĐT: "+record.get("Mota").asString());
+                 System.out.println("Thời gian trích rút: "+record.get("Time").asString());
              }
          }
     }
 	
 	public void findPerson1(String Ten) {
-    	String q = "MATCH (e:Person) WHERE e.Nhan ENDS WITH {Ten} RETURN e.Nhan AS Nhan, e.Age AS Age, e.Mota AS Mota, e.Job AS Job";
+    	String q = "MATCH (e:Person) WHERE e.Nhan ENDS WITH {Ten} RETURN e.Nhan AS Nhan, "
+    			+ "e.Age AS Age, e.Mota AS Mota, e.Job AS Job, e.ThoiGianTrichRut AS Time";
     	System.out.println("Những người có tên "+Ten+":");
     	 try (Session session = ConnectionDB.cn.driver.session()){
              StatementResult result = session.run(q,parameters("Ten", Ten));
@@ -88,7 +92,8 @@ public class TruyVanCoBan {
                  System.out.println("Tuổi: "+record.get("Age").asString());
                  System.out.println("Nghề nghiệp: "+record.get("Job").asString());
                  System.out.println("SĐT: "+record.get("Mota").asString());
-             }
+                 System.out.println("Thời gian trích rút: "+record.get("Time").asString());
+                 }
          }
     }
 	public void findLink(String Org) {
