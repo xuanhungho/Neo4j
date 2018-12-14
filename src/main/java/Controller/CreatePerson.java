@@ -52,7 +52,7 @@ public class CreatePerson{
 	
 	public int randomAge() {
 		
-		return new Random().nextInt(60)+20;
+		return new Random().nextInt(90);
 	}
 
 	public String randomJob() {

@@ -11,6 +11,13 @@ public class createEntity {
 	public void createEntitys(int personCount, int OrganizatuionCount, int locationCount, int eventCount, int countryCount, int timeCount ) {
 		
 		long begin = Calendar.getInstance().getTimeInMillis();
+		System.out.println("Đang xoá các node cũ...");
+		try {
+			ConnectionDB.cn.removeData();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+		}
+		System.out.println("Đang tạo node...");
 		CreatePerson per = new CreatePerson();
 		per.CreateNodePerson(personCount);
 		
@@ -30,12 +37,12 @@ public class createEntity {
 		time.CreateNodeTime(timeCount);
 		
 //		Tạo node Link bài viết và quan hệ tới các node sẵn có
-		
+		System.out.println("Đang tạo quan hệ...");
 		CreateRelationships Rela = new CreateRelationships();
 		Rela.CreateRelationship();
 		
 		long end = Calendar.getInstance().getTimeInMillis();
-		System.out.println("Chèn code qua java: " + (end - begin)+" mili giây!");
+		System.out.println("Done: " + (end - begin)+" mili giây!");
 
 	}
 }

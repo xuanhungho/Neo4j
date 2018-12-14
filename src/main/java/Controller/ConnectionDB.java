@@ -1,6 +1,6 @@
 package Controller;
 
-import static org.neo4j.driver.v1.Values.parameters;
+import static org.neo4j.driver.v1.Values.parameters; 
 
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Driver;
@@ -11,18 +11,15 @@ import org.neo4j.driver.v1.StatementResult;
 import org.neo4j.driver.v1.Transaction;
 
 import Data.Connection;
-/**
- * Kết nối cơ sở dữ liệu
- * @author tt
- *
- */
+
 
 public class ConnectionDB {
 	
 	public final Driver driver;
 	public final static ConnectionDB cn = new ConnectionDB(Connection.host,Connection.username,Connection.password);
 	
-    public ConnectionDB( String uri, String user, String password )
+   
+	public ConnectionDB( String uri, String user, String password )
     {
         driver = GraphDatabase.driver( uri, AuthTokens.basic( user, password ) );
     }
@@ -37,14 +34,6 @@ public class ConnectionDB {
         driver.close();
     }
     
-    public StatementResult executes(String s){
-    	
-    	StatementResult rs= null;
-    	try ( Session session = driver.session() ){
-    		rs=session.run(s);
-    	}
-    	return rs;
-    }
 	
     public void execute (String s) {
     	  try (Session session = driver.session())
