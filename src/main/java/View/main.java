@@ -58,20 +58,20 @@ public class main {
 		
 		//Tạo các node và quan hệ qua 1 hàm:
 		
-		createEntity en =new createEntity();
-		en.createEntitys(40,40,40,40,40,40);
+//		createEntity en =new createEntity();
+//		en.createEntitys(40,40,40,40,40,40);
 		
 		// 10 truy vấn cơ bản
-//		TruyVanCoBan query = new TruyVanCoBan();
+		TruyVanCoBan query = new TruyVanCoBan();
 		
 		//1. In ra ten cua tat ca nhung nguoi co tuoi 65
-//		query.findPerson("65");
+//		query.findPerson(65);
 		
-		//2. In ra ten cua tat ca nhung nguoi có quốc tịch Lao
+		//2. In ra Thông tin cua tat ca nhung nguoi có quốc tịch Lao
 //		query.findPerson("Lao");
 		
-		//3. In ra ten cua tat ca nhung nguoi họ "Ho"
-//		query.findPerson("Ho");
+		//3. In ra ten cua tat ca nhung nguoi ten "Hung"
+		query.findPerson1("Hung");
 		
 		
 		long end = Calendar.getInstance().getTimeInMillis();
