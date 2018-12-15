@@ -46,10 +46,9 @@ public class CreateOrganization {
 		return truso;
 	}
 	
-	public Date randomThoiGian(int i) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, -i);
-		return calendar.getTime();
+	public Date randomThoiGian() {
+		Date date = new Date();
+		return date;
 	}
 	public String randomDinhDanh(int i) {
 		return this.Tempid +i;
@@ -65,7 +64,7 @@ public class CreateOrganization {
 				Org.setDinhdanh(randomDinhDanh(i));
 				Org.setMota(randomMoTa());
 				Org.setLink(randomLink());
-				Org.setDate(randomThoiGian(i));
+				Org.setDate(randomThoiGian());
 				Org.setTruSo(randomTruSo());
 				
 				ConnectionDB.cn.execute("CREATE ("+Org.getDinhdanh()+":Organization { "

@@ -31,10 +31,9 @@ public class CreateCountry{
 		return link;
 	}
 	
-	public Date randomThoiGian(int i) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, -i);
-		return calendar.getTime();
+	public Date randomThoiGian() {
+		Date date = new Date();
+		return date;
 	}
 	
 	public String randomDinhDanh(int i) {
@@ -57,7 +56,7 @@ public class CreateCountry{
 				Country.setDinhdanh(randomDinhDanh(i));
 				Country.setMota(randomMoTa());
 				Country.setLink(randomLink());
-				Country.setDate(randomThoiGian(i));
+				Country.setDate(randomThoiGian());
 				
 				ConnectionDB.cn.execute("CREATE ("+Country.getDinhdanh()+":Country { "
 					+ "DinhDanh: '"+Country.getDinhdanh()+"', "

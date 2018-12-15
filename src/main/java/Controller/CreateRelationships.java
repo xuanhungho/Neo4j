@@ -1,5 +1,7 @@
 package Controller;
- 
+
+import Data.DataExample;
+
 public class CreateRelationships {
 
 	public CreateRelationships() {
@@ -11,8 +13,8 @@ public class CreateRelationships {
 //					"AND per.LinkTrichRut = event.LinkTrichRut AND per.Age > '20' AND per.Age < '50' WITH DISTINCT per, event CREATE (per)-[:THAM_GIA]->(event) ");
 //			
 			ConnectionDB.cn.execute("MATCH (per:Person),(event:Event) WHERE per.Nhan <> event.DaiDien\r\n" + 
-					"AND per.LinkTrichRut = event.LinkTrichRut AND per.ThoiGianTrichRut=event.ThoiGianTrichRut\r\n"
-					+ "WITH DISTINCT per, event CREATE (per)-[:THAM_GIA]->(event) ");
+					"AND per.LinkTrichRut = event.LinkTrichRut WITH DISTINCT per, event CREATE (per)-[:THAM_GIA]->(event) ");
+			
 			
 			ConnectionDB.cn.execute("MATCH (per:Person),(event:Event) WHERE per.Nhan = event.DaiDien\r\n" + 
 					"AND per.LinkTrichRut = event.LinkTrichRut CREATE (per)-[:TO_CHUC]->(event)");

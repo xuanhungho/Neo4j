@@ -39,10 +39,9 @@ public class CreateLocation{
 		return link;
 	}
 	
-	public Date randomThoiGian(int i) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, -i);
-		return calendar.getTime();
+	public Date randomThoiGian() {
+		Date date = new Date();
+		return date;
 	}
 	
 	public String randomDinhDanh(int i) {
@@ -65,7 +64,7 @@ public class CreateLocation{
 				Location.setDinhdanh(randomDinhDanh(i));
 				Location.setMota(randomMoTa());
 				Location.setLink(randomLink());
-				Location.setDate(randomThoiGian(i));
+				Location.setDate(randomThoiGian());
 				Location.setQuocGia(randomQuocGia());
 				
 				ConnectionDB.cn.execute("CREATE ("+Location.getDinhdanh()+":Location { "
