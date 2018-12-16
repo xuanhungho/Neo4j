@@ -37,9 +37,9 @@ public class createEntity {
 		time.CreateNodeTime(timeCount);
 		
 //		Tạo node Link bài viết và quan hệ tới các node sẵn có
-		System.out.println("Đang tạo quan hệ...");
-		CreateRelationships Rela = new CreateRelationships();
-		Rela.CreateRelationship();
+//		System.out.println("Đang tạo quan hệ...");
+//		CreateRelationships Rela = new CreateRelationships();
+//		Rela.CreateRelationship();
 		
 		long end = Calendar.getInstance().getTimeInMillis();
 		System.out.println("Done: " + (end - begin)+" mili giây!");

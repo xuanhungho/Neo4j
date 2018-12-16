@@ -1,7 +1,7 @@
 package Controller;
 
-import java.util.Calendar; 
-import java.util.Date; 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import Data.DataExample;
 import Model.Person;
@@ -38,9 +38,10 @@ public class CreatePerson{
 	}
 	
 	
-	public Date randomThoiGian() {
-		Date date = new Date();
-		return date;
+	public Date randomThoiGian(int i) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -i);
+		return calendar.getTime();
 	}
 	
 	public String randomNhan() {
@@ -67,30 +68,18 @@ public class CreatePerson{
 		return qt;
 	}
 	
-//	public Person randomPerson(int id) {
-//		Person Person = new Person();
-//		Person.setNhan(randomDinhDanh(id));
-//		Person.setMota(randomMoTa());
-//		Person.setLink(randomLink());
-//		Person.setDate(randomThoiGian());
-//		Person.setAge(randomAge());
-//		Person.setDinhdanh(randomNhan());
-//		Person.setJob(randomJob());
-//		Person.setQuoctich(randomQuocTich());
-//		return Person;
-//	}
-
 	public void CreateNodePerson(int num) {
 		long begin = Calendar.getInstance().getTimeInMillis();
 		Person Person = new Person();
-
+		
 		try {
+			System.out.println("Đang thêm node Person...");
 			for(int i=0; i<num; i++) {	
 				Person.setNhan(randomNhan());
 				Person.setDinhdanh(randomDinhDanh(i));
 				Person.setMota(randomMoTa());
 				Person.setLink(randomLink());
-				Person.setDate(randomThoiGian());
+				Person.setDate(randomThoiGian(i));
 				Person.setAge(randomAge());
 				Person.setJob(randomJob());
 				Person.setQuoctich(randomQuocTich());
@@ -104,10 +93,14 @@ public class CreatePerson{
 					+ "Age: '"+Person.getAge()+"', "
 					+ "Job: '"+Person.getJob()+"', "
 					+ "Quoctich: '"+Person.getQuoctich()+"'})");
-		System.out.println("Da them "+Person.getDinhdanh()+"!");
+		if ((i%1000)==0) System.out.println("Đã thêm "+Person.getDinhdanh()+"!");
+		if ((i%10000)==0) {
+			long end = Calendar.getInstance().getTimeInMillis();
+			System.out.println("Thời gian: " + (end - begin)+" mili giây!");
+		}
 		}	
 			long end = Calendar.getInstance().getTimeInMillis();
-			System.out.println("Thời gian thực hiện: " + (end - begin)+" mili giây!");
+			System.out.println("Thêm Person: " + (end - begin)+" mili giây!");
 			
 			} catch (Exception e) {
 				System.out.println(e.getMessage());

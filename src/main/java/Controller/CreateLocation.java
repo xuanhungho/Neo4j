@@ -39,9 +39,10 @@ public class CreateLocation{
 		return link;
 	}
 	
-	public Date randomThoiGian() {
-		Date date = new Date();
-		return date;
+	public Date randomThoiGian(int i) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -i);
+		return calendar.getTime();
 	}
 	
 	public String randomDinhDanh(int i) {
@@ -58,13 +59,13 @@ public class CreateLocation{
 		long begin = Calendar.getInstance().getTimeInMillis();
 		Location Location = new Location();
 		try {
-	
+			System.out.println("Đang thêm node Location...");
 			for(int i=0; i<num; i++) {	
 				Location.setNhan(randomNhan());
 				Location.setDinhdanh(randomDinhDanh(i));
 				Location.setMota(randomMoTa());
 				Location.setLink(randomLink());
-				Location.setDate(randomThoiGian());
+				Location.setDate(randomThoiGian(i));
 				Location.setQuocGia(randomQuocGia());
 				
 				ConnectionDB.cn.execute("CREATE ("+Location.getDinhdanh()+":Location { "
@@ -74,11 +75,11 @@ public class CreateLocation{
 					+ "LinkTrichRut: '"+Location.getLink()+"', "			
 					+ "ThoiGianTrichRut:'"+Location.getDate()+"', "
 					+ "QuocGia: '"+Location.getQuocGia()+"'})");
-		System.out.println("Da them "+Location.getDinhdanh()+"!");
+				if ((i%1000)==0) System.out.println("Da them "+Location.getDinhdanh()+"!");
 		}	
 			
 			long end = Calendar.getInstance().getTimeInMillis();
-			System.out.println("Thời gian thực hiện: " + (end - begin)+" mili giây!");
+			System.out.println("Thêm Location: " + (end - begin)+" mili giây!");
 			
 			} catch (Exception e) {
 				System.out.println(e.getMessage());

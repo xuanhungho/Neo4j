@@ -10,10 +10,11 @@ public class CreateTime{
 	String Tempid;
 	DataExample data = new DataExample();
 
-	public String randomNhan() {
-		Date date = new Date();
-		Tempid = date.toString();
-		return  Tempid;
+	public String randomNhan(int i) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -i);
+		Tempid = calendar.getTime().toString();
+		return Tempid;
 	}
 
 	public String randomMoTa() {
@@ -26,9 +27,10 @@ public class CreateTime{
 		return link;
 	}
 	
-	public Date randomThoiGian() {
-		Date date = new Date();
-		return date;
+	public Date randomThoiGian(int i) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -i);
+		return calendar.getTime();
 	}
 	
 	public String randomDinhDanh(int i) {
@@ -41,12 +43,13 @@ public class CreateTime{
 		Time Time = new Time();
 
 		try {
+			System.out.println("Đang thêm node Time...");
 				for(int i=0; i<num; i++) {	
-				Time.setNhan(randomNhan());
+				Time.setNhan(randomNhan(i));
 				Time.setDinhdanh(randomDinhDanh(i));
 				Time.setMota(randomMoTa());
 				Time.setLink(randomLink());
-				Time.setDate(randomThoiGian());
+				Time.setDate(randomThoiGian(i));
 
 				ConnectionDB.cn.execute("CREATE ("+Time.getDinhdanh()+":Time { "
 					+ "DinhDanh: '"+Time.getDinhdanh()+"', "
@@ -54,7 +57,7 @@ public class CreateTime{
 					+ "Mota: '"+Time.getMota()+"', "
 					+ "LinkTrichRut: '"+Time.getLink()+"', "			
 					+ "ThoiGianTrichRut: '"+Time.getDate()+"'})");
-		System.out.println("Da them "+Time.getDinhdanh()+"!");
+				if ((i%1000)==0) System.out.println("Da them "+Time.getDinhdanh()+"!");
 		}	
 		
 			long end = Calendar.getInstance().getTimeInMillis();

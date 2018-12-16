@@ -10,19 +10,6 @@ public class CreateEvent{
 	
 	public String Tempid;
 	DataExample data = new DataExample();
-	
-//	public Event randomEvent() {
-//		Event Event = new Event();
-//		Event.setNhan(randomNhan());
-//		Event.setMota(randomMoTa());
-//		Event.setLink(randomLink());
-//		Event.setDate(randomThoiGian());
-//		Event.setDiadiem(randomDiaDiem());
-//		Event.setDinhdanh(randomDinhDanh());
-//		Event.setDaidientochuc(randomDaiDien());
-//		Event.setTime(randomTime());
-//		return Event;
-//	}
 
 	public String randomNhan() {
 		String nhan = null ;
@@ -43,9 +30,10 @@ public class CreateEvent{
 		return link;
 	}
 	
-	public Date randomThoiGian() {
-		Date date = new Date();
-		return date;
+	public Date randomThoiGian(int i) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -i);
+		return calendar.getTime();
 	}
 	
 	public String randomDinhDanh(int i) {
@@ -75,13 +63,14 @@ public class CreateEvent{
 	public void CreateNodeEvent(int num) {
 		long begin = Calendar.getInstance().getTimeInMillis();
 		Event Event = new Event();
-		try {			
+		try {		
+			System.out.println("Đang thêm node Event...");
 			for(int i=0; i<num; i++) {	
 				Event.setNhan(randomNhan());
 				Event.setDinhdanh(randomDinhDanh(i));
 				Event.setMota(randomMoTa());
 				Event.setLink(randomLink());
-				Event.setDate(randomThoiGian());
+				Event.setDate(randomThoiGian(i));
 				Event.setDaidientochuc(randomDaiDien());
 				Event.setDiadiem(randomDiaDiem());
 				Event.setTime(randomTime());
@@ -96,11 +85,11 @@ public class CreateEvent{
 					+ "ThoiGianToChuc: '"+Event.getTime()+"', "
 					+ "DaiDien: '"+Event.getDaidientochuc()+"'})");
 		
-		System.out.println("Da them "+Event.getDinhdanh()+"!");
+				if ((i%1000)==0) System.out.println("Da them "+Event.getDinhdanh()+"!");
 		}	
 			
 			long end = Calendar.getInstance().getTimeInMillis();
-			System.out.println("Thời gian thực hiện: " + (end - begin)+" mili giây!");
+			System.out.println("Thêm Event: " + (end - begin)+" mili giây!");
 			
 			} catch (Exception e) {
 				System.out.println(e.getMessage());

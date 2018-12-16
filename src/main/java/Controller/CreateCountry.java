@@ -31,9 +31,10 @@ public class CreateCountry{
 		return link;
 	}
 	
-	public Date randomThoiGian() {
-		Date date = new Date();
-		return date;
+	public Date randomThoiGian(int i) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -i);
+		return calendar.getTime();
 	}
 	
 	public String randomDinhDanh(int i) {
@@ -50,13 +51,14 @@ public class CreateCountry{
 	public void CreateNodeCountry(int num) {
 		long begin = Calendar.getInstance().getTimeInMillis();
 		Country Country = new Country();
-		try {		
+		try {	
+			System.out.println("Đang thêm node Country...");
 			for(int i=0; i<num; i++) {	
 				Country.setNhan(randomNhan());
 				Country.setDinhdanh(randomDinhDanh(i));
 				Country.setMota(randomMoTa());
 				Country.setLink(randomLink());
-				Country.setDate(randomThoiGian());
+				Country.setDate(randomThoiGian(i));
 				
 				ConnectionDB.cn.execute("CREATE ("+Country.getDinhdanh()+":Country { "
 					+ "DinhDanh: '"+Country.getDinhdanh()+"', "
@@ -64,11 +66,11 @@ public class CreateCountry{
 					+ "Mota: '"+Country.getMota()+"', "
 					+ "LinkTrichRut: '"+Country.getLink()+"', "			
 					+ "ThoiGianTrichRut: '"+Country.getDate()+"'})");
-		System.out.println("Da them "+Country.getDinhdanh()+"!");
+				if ((i%1000)==0) System.out.println("Da them "+Country.getDinhdanh()+"!");
 		}	
 			
 			long end = Calendar.getInstance().getTimeInMillis();
-			System.out.println("Thời gian thực hiện: " + (end - begin)+" mili giây!");
+			System.out.println("Thêm Country: " + (end - begin)+" mili giây!");
 			
 			} catch (Exception e) {
 				System.out.println(e.getMessage());

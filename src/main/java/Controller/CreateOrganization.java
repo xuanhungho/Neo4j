@@ -46,9 +46,10 @@ public class CreateOrganization {
 		return truso;
 	}
 	
-	public Date randomThoiGian() {
-		Date date = new Date();
-		return date;
+	public Date randomThoiGian(int i) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, -i);
+		return calendar.getTime();
 	}
 	public String randomDinhDanh(int i) {
 		return this.Tempid +i;
@@ -58,13 +59,13 @@ public class CreateOrganization {
 		long begin = Calendar.getInstance().getTimeInMillis();
 		Organization Org = new Organization();
 		try {
-			
+			System.out.println("Đang thêm node Organization...");
 			for(int i=0; i<num; i++) {	
 				Org.setNhan(randomNhan());
 				Org.setDinhdanh(randomDinhDanh(i));
 				Org.setMota(randomMoTa());
 				Org.setLink(randomLink());
-				Org.setDate(randomThoiGian());
+				Org.setDate(randomThoiGian(i));
 				Org.setTruSo(randomTruSo());
 				
 				ConnectionDB.cn.execute("CREATE ("+Org.getDinhdanh()+":Organization { "
@@ -74,10 +75,10 @@ public class CreateOrganization {
 					+ "LinkTrichRut: '"+Org.getLink()+"', "			
 					+ "ThoiGianTrichRut: '"+Org.getDate()+"', "
 					+ "TruSo: '"+Org.getTruSo()+"'})");
-		System.out.println("Da them Org "+Org.getDinhdanh()+"!");
+				if ((i%1000)==0) System.out.println("Da them Org "+Org.getDinhdanh()+"!");
 		}	
 			long end = Calendar.getInstance().getTimeInMillis();
-			System.out.println("Thời gian thực hiện: " + (end - begin)+" mili giây!");
+			System.out.println("Thêm Organization: " + (end - begin)+" mili giây!");
 			
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
