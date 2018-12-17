@@ -9,6 +9,7 @@ import model.Time;
 
 public class CreateTime{
 	String Tempid;
+	
 	DataExample data = new DataExample();
 
 	public String randomNhan(int i) {
@@ -37,7 +38,7 @@ public class CreateTime{
 	}
 	
 	public String randomDinhDanh(int i) {
-		String tem = (Tempid).substring(0,3).trim();
+		String tem = "Time";
 		return tem+i;
 	}
 	
@@ -54,7 +55,7 @@ public class CreateTime{
 				Time.setLink(randomLink());
 				Time.setDate(randomThoiGian(i));
 
-				ConnectionDB.cn.execute("CREATE ("+Time.getDinhdanh()+":Time { "
+				Neo4j.connection.execute("CREATE ("+Time.getDinhdanh()+":Time { "
 					+ "DinhDanh: '"+Time.getDinhdanh()+"', "
 					+ "Nhan: '"+Time.getNhan()+"', "
 					+ "Mota: '"+Time.getMota()+"', "

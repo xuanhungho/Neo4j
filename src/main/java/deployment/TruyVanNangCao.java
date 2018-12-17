@@ -6,23 +6,25 @@ import org.neo4j.driver.v1.Record;
 import org.neo4j.driver.v1.Session;
 import org.neo4j.driver.v1.StatementResult;
 
-import controller.ConnectionDB;
+import controller.Neo4j;
 
 public class TruyVanNangCao {
 
 	public void findPerson(String Ho) {
     	String q = "MATCH (e:Person) WHERE e.Nhan CONTAINS {Ho} OR e.Age CONTAINS {Ho} OR e.Quoctich CONTAINS {Ho} OR e.Mota CONTAINS {Ho} "
-    			+ "RETURN e.Nhan AS Nhan, e.Age AS Age, e.Mota AS Mota, e.Job AS Job";
+    			+ "RETURN e.Nhan AS Nhan, e.Age AS Age, e.Mota AS Mota, e.Job AS Job, e.Quoctich AS qt";
     	System.out.println("Người có thông tin trên là: "+Ho+":");
-    	 try (Session session = ConnectionDB.cn.driver.session()){
+    	 try (Session session = Neo4j.connection.driver.session()){
              StatementResult result = session.run(q,parameters("Ho", Ho));
              while (result.hasNext())
              {
                  Record record = result.next();
+                 System.out.println("-----");
                  System.out.println("Tên: "+record.get("Nhan").asString());
                  System.out.println("Tuổi: "+record.get("Age").asString());
                  System.out.println("Nghề nghiệp: "+record.get("Job").asString());
                  System.out.println("SĐT: "+record.get("Mota").asString());
+                 System.out.println("Quốc tịch: "+record.get("qt").asString());
              }
          }
     }
@@ -31,7 +33,7 @@ public class TruyVanNangCao {
 		String q = "MATCH (per:Person)-[:DEN_THAM]->(country:Location)-[:DEN_THAM_VAO]->(time:Time) WHERE per.Nhan = {ten} "
 				+ " WITH DISTINCT country, time RETURN country.Nhan AS locaNhan, time.Nhan AS timeNhan";
 		System.out.println("Những địa điểm "+ten+" đã đến thăm là:");
-   	 try (Session session = ConnectionDB.cn.driver.session()){
+   	 try (Session session = Neo4j.connection.driver.session()){
             StatementResult result = session.run(q,parameters("ten", ten));
             while (result.hasNext())
             {
@@ -49,7 +51,7 @@ public class TruyVanNangCao {
 				+ " WITH DISTINCT loca, time RETURN loca.Nhan AS locaNhan, time.Nhan AS timeNhan ";
 		System.out.println(" ");
 		System.out.println("Những nơi "+ten+" đến thăm vào tháng 11/2018 là:");
-   	 try (Session session = ConnectionDB.cn.driver.session()){
+   	 try (Session session = Neo4j.connection.driver.session()){
             StatementResult result = session.run(q,parameters("ten", ten));
             while (result.hasNext())
             {
@@ -67,7 +69,7 @@ public class TruyVanNangCao {
 				+ " WITH DISTINCT event, time RETURN event.Nhan AS locaNhan, time.Nhan AS timeNhan ";
 		System.out.println(" ");
 		System.out.println("Những sự kiện diễn ra tại "+location+" vào tháng 10/2018 là:");
-   	 try (Session session = ConnectionDB.cn.driver.session()){
+   	 try (Session session = Neo4j.connection.driver.session()){
             StatementResult result = session.run(q,parameters("location", location));
             while (result.hasNext())
             {
@@ -81,16 +83,16 @@ public class TruyVanNangCao {
     	System.out.println("Những thực thể đề cập đến bài viết trong "+link+" là:");
     	
     	String q = "MATCH (per:Person) WHERE per.LinkTrichRut = {link}\n" + 
-    			"MATCH (Org:Organization) WHERE per.LinkTrichRut = {link}\n" + 
+    			"MATCH (Org:Organization) WHERE Org.LinkTrichRut = {link}\n" + 
     			"MATCH (loca:Location) WHERE loca.LinkTrichRut = {link}\n" + 
     			"MATCH (event:Event) WHERE event.LinkTrichRut = {link}\n" + 
     			"MATCH (country:Country) WHERE country.LinkTrichRut = {link}\n" + 
     			"MATCH (time:Time) WHERE time.LinkTrichRut = {link}\n" + 
     			"WITH DISTINCT per, Org, loca, event,country, time \n" + 
     			"RETURN per.Nhan AS perNhan, Org.Nhan AS OrgNhan, loca.Nhan AS locaNhan,\n" + 
-    			"event.Nhan AS eventNhan, country.Nhan AS countryNhan, time.Nhan AS timeNhan\n";
+    			"event.Nhan AS eventNhan, country.Nhan AS countryNhan, time.Nhan AS timeNhan LIMIT 10\n";
 
-    	 try (Session session = ConnectionDB.cn.driver.session()){
+    	 try (Session session = Neo4j.connection.driver.session()){
              StatementResult result = session.run(q,parameters("link", link));
              while (result.hasNext()){
                  Record record = result.next();
@@ -100,7 +102,7 @@ public class TruyVanNangCao {
                  if(record.get("eventNhan").asString() != "null") System.out.println("Event: "+record.get("eventNhan").asString());
                  if(record.get("countryNhan").asString() != "null") System.out.println("Country: "+record.get("countryNhan").asString());
                  if(record.get("timeNhan").asString() != "null") System.out.println("Time: "+record.get("timeNhan").asString());
-             }
+                 System.out.println("----");}
          }
     }
 	

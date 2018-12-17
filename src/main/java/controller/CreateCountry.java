@@ -40,7 +40,7 @@ public class CreateCountry{
 	}
 	
 	public String randomDinhDanh(int i) {
-		String tem = (Tempid).substring(0,2).trim();
+		String tem = (Tempid).replace(" ", "_");
 		return tem+i;
 	}
 	
@@ -62,7 +62,7 @@ public class CreateCountry{
 				Country.setLink(randomLink());
 				Country.setDate(randomThoiGian(i));
 				
-				ConnectionDB.cn.execute("CREATE ("+Country.getDinhdanh()+":Country { "
+				Neo4j.connection.execute("CREATE ("+Country.getDinhdanh()+":Country { "
 					+ "DinhDanh: '"+Country.getDinhdanh()+"', "
 					+ "Nhan: '"+Country.getNhan()+"', "
 					+ "Mota: '"+Country.getMota()+"', "

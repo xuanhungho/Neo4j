@@ -51,8 +51,4 @@ public class Thucthe {
 	public Date getDate() {
 		return thoigian;
 	}
-	
-	public String getThucthe() {
-		return "Thucthe: [Dinhdanh =" + dinhdanh + ", Nhan =" + nhan + ", Mo ta =" + mota + ", Link =" + link + "]";
-	}
 }

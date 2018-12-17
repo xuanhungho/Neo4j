@@ -2,7 +2,7 @@ package graph;
 
 import java.util.Calendar;
 
-import controller.ConnectionDB;
+import controller.Neo4j;
 import controller.CreateCountry;
 import controller.CreateEvent;
 import controller.CreateLocation;
@@ -22,7 +22,7 @@ public class CreateEntity {
 		long begin = Calendar.getInstance().getTimeInMillis();
 		System.out.println("Đang xoá các node cũ...");
 		try {
-			ConnectionDB.cn.removeData();
+			Neo4j.connection.removeData();
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 		}

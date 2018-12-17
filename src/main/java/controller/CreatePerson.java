@@ -12,17 +12,8 @@ public class CreatePerson{
 	private String Tempid;
 	DataExample data = new DataExample();
 	
-	public String lastName() {
-		String lastName = null ;
-		lastName = data.lastName[new Random().nextInt(data.lastName.length)];
-		this.Tempid = lastName;
-		return lastName;
-	}
-	
 	public String randomDinhDanh(int id) {
-		String nhan = null ;
-		nhan = this.Tempid + id;
-		return nhan;
+		return Tempid.replace(" ", "_")+id;
 	}
 
 	public String randomMoTa() {
@@ -49,7 +40,9 @@ public class CreatePerson{
 	public String randomNhan() {
 		String id;
 		id = data.firstName[new Random().nextInt(data.firstName.length)]+" "+
-				data.midName[new Random().nextInt(data.midName.length)]+" "+lastName();
+			data.midName[new Random().nextInt(data.midName.length)]
+			+" "+data.lastName[new Random().nextInt(data.lastName.length)];
+		this.Tempid = id;
 		return id;
 	}
 	
@@ -86,7 +79,7 @@ public class CreatePerson{
 				Person.setJob(randomJob());
 				Person.setQuoctich(randomQuocTich());
 
-		ConnectionDB.cn.execute("CREATE ("+Person.getDinhdanh()+":Person { "
+		Neo4j.connection.execute("CREATE ("+Person.getDinhdanh()+":Person { "
 					+ "DinhDanh: '"+Person.getDinhdanh()+"', "
 					+ "Nhan: '"+Person.getNhan()+"', "
 					+ "Mota: '"+Person.getMota()+"', "

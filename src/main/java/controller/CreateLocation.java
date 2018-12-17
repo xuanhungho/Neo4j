@@ -39,7 +39,7 @@ public class CreateLocation{
 	}
 	
 	public String randomDinhDanh(int i) {
-		String tem = (Tempid).substring(0,3).trim();
+		String tem = (Tempid).replace(" ", "_");
 		return tem+i;
 	}
 	public String randomQuocGia() {
@@ -61,7 +61,7 @@ public class CreateLocation{
 				Location.setDate(randomThoiGian(i));
 				Location.setQuocGia(randomQuocGia());
 				
-				ConnectionDB.cn.execute("CREATE ("+Location.getDinhdanh()+":Location { "
+				Neo4j.connection.execute("CREATE ("+Location.getDinhdanh()+":Location { "
 					+ "DinhDanh: '"+Location.getDinhdanh()+"', "
 					+ "Nhan: '"+Location.getNhan()+"', "
 					+ "Mota: '"+Location.getMota()+"', "

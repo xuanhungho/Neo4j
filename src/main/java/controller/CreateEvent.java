@@ -10,6 +10,7 @@ import model.Event;
 public class CreateEvent{
 	
 	public String Tempid;
+
 	DataExample data = new DataExample();
 
 	public String randomNhan() {
@@ -39,7 +40,7 @@ public class CreateEvent{
 	}
 	
 	public String randomDinhDanh(int i) {
-		String tem = (Tempid).substring(0,2).trim();
+		String tem = (Tempid).replace(" ", "_");
 		return tem+i;
 	}
 	
@@ -57,9 +58,11 @@ public class CreateEvent{
 		return nhan;
 	}
 
-	public Date randomTime() {
-		Date date = new Date();
-		return date;
+	public Date randomTime(int i) {
+		Calendar calendar = Calendar.getInstance();
+		i = i%6500+new Random().nextInt(15);
+		calendar.add(Calendar.DATE, -i);
+		return calendar.getTime();
 	}
 	
 	public void CreateNodeEvent(int num) {
@@ -75,9 +78,9 @@ public class CreateEvent{
 				Event.setDate(randomThoiGian(i));
 				Event.setDaidientochuc(randomDaiDien());
 				Event.setDiadiem(randomDiaDiem());
-				Event.setTime(randomTime());
+				Event.setTime(randomTime(i));
 				
-				ConnectionDB.cn.execute("CREATE ("+Event.getDinhdanh()+":Event { "
+				Neo4j.connection.execute("CREATE ("+Event.getDinhdanh()+":Event { "
 					+ "Nhan: '"+Event.getNhan()+"', "
 					+ "DinhDanh: '"+Event.getDinhdanh()+"', "
 					+ "Mota: '"+Event.getMota()+"', "

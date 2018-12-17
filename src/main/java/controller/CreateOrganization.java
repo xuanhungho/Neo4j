@@ -45,7 +45,8 @@ public class CreateOrganization {
 		return calendar.getTime();
 	}
 	public String randomDinhDanh(int i) {
-		return this.Tempid +i;
+		String tem = Tempid.replace(" ", "_");
+		return tem+i;
 	}
 	
 	public void CreateNodeOrganization(int num) {
@@ -61,7 +62,7 @@ public class CreateOrganization {
 				Org.setDate(randomThoiGian(i));
 				Org.setTruSo(randomTruSo());
 				
-				ConnectionDB.cn.execute("CREATE ("+Org.getDinhdanh()+":Organization { "
+				Neo4j.connection.execute("CREATE ("+Org.getDinhdanh()+":Organization { "
 					+ "DinhDanh: '"+Org.getDinhdanh()+"', "
 					+ "Nhan: '"+Org.getNhan()+"', "
 					+ "Mota: '"+Org.getMota()+"', "
