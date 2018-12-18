@@ -138,5 +138,38 @@ public class TruyVanCoBan {
             }
         }
 	}
+
+	public void seachLocation(String country) {
+		String q = "MATCH (loca:Location) WHERE loca.QuocGia = {country} "
+				+ "WITH DISTINCT loca RETURN loca.DinhDanh AS locaDD, loca.Nhan AS locaNhan";
+	   	 try (Session session = Neo4j.connection.driver.session()){
+	            StatementResult result = session.run(q,parameters("country", country));
+	            System.out.println("Loation có trong "+country+" là:");
+	            while (result.hasNext())
+	            {
+	                Record record = result.next();
+	                System.out.println("Định danh: "+record.get("locaDD").asString()+" - Nhãn: "+record.get("locaNhan").asString());
+	             
+	            }
+	        }
+	}
+
+	public void seach_DEN_THAM() {
+		String q = "MATCH (per:Person)-[:DEN_THAM]->(loca:Location)-[:DEN_THAM_VAO]->(time:Time)"
+				+ " WITH DISTINCT per, loca, time RETURN per.Nhan AS perNhan, "
+				+ "loca.Nhan AS locaNhan, time.Nhan AS timeNhan LIMIT 20";
+		System.out.println(" ");
+		System.out.println("20 quan hệ (Person)-[:DEN_THAM]->(Location)-[:DEN_THAM_VAO]->(Time):");
+   	 try (Session session = Neo4j.connection.driver.session()){
+            StatementResult result = session.run(q);
+            while (result.hasNext())
+            {
+                Record record = result.next();
+                System.out.println(record.get("perNhan").asString()+" ĐẾN THĂM: "+record.get("locaNhan").asString()+
+                		" VÀO: "+record.get("timeNhan").asString());
+                
+            }
+        }
+	}
 	
 }

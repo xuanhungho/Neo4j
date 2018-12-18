@@ -72,16 +72,17 @@ public class Run {
 		
 // ==========================================================
 			
-		/*
+		/*	
+		 		
 		// -------------- 10 truy vấn cơ bản ---------------
 		TruyVanCoBan query1 = new TruyVanCoBan();
-		
+
 		//1. In ra ten cua tat ca nhung nguoi co tuoi 65
 		long begin_query1 = Calendar.getInstance().getTimeInMillis();
 		query1.findPerson(76);
 		long end_query1 = Calendar.getInstance().getTimeInMillis();
 		System.out.println("Truy vấn cơ bản 1: "+ -(begin_query1 - end_query1)+" mili giây!");	
-		
+
 		//2. In ra Thông tin cua tat ca nhung nguoi có quốc tịch Lao
 		begin_query1 = Calendar.getInstance().getTimeInMillis();
 		query1.findPerson("Lao");
@@ -101,7 +102,7 @@ public class Run {
 		end_query1 = Calendar.getInstance().getTimeInMillis();
 		System.out.println("Truy vấn cơ bản 4: "+ -(begin_query1 - end_query1)+" mili giây!");	
 		
-		//5. In ra nhãn của 1 thực thể tùy  
+		//5. In ra nhãn của 1 thực thể tùy chọn 
 		//Nhập Person, Organization, Event, Location, Country, Time hoặc 1,2,3,4,5,6 để xác định đối 
 		begin_query1 = Calendar.getInstance().getTimeInMillis();
 		query1.find("Person");
@@ -125,8 +126,21 @@ public class Run {
 		query1.findDiaDiem("Ca múa nhạc tạp kỹ");
 		end_query1 = Calendar.getInstance().getTimeInMillis();
 		System.out.println("Truy vấn cơ bản 8: "+ -(begin_query1 - end_query1)+" mili giây!");	
+
+		//9. In các location có trong 1 country:
+		begin_query1 = Calendar.getInstance().getTimeInMillis();
+		query1.seachLocation("Viet Nam");
+		end_query1 = Calendar.getInstance().getTimeInMillis();
+		System.out.println("Truy vấn cơ bản 9: "+ -(begin_query1 - end_query1)+" mili giây!");	
+
+		//10. In ra 20 Person, location, time có trong quan hệ Person đến thăm Lociton vào Time:
+		begin_query1 = Calendar.getInstance().getTimeInMillis();
+		query1.seach_DEN_THAM();
+		end_query1 = Calendar.getInstance().getTimeInMillis();
+		System.out.println("Truy vấn cơ bản 10: "+ -(begin_query1 - end_query1)+" mili giây!");					
 		
-			*/
+		*/
+		
 // ==========================================================
 		
 		/*
