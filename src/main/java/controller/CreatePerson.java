@@ -32,7 +32,7 @@ public class CreatePerson{
 	
 	public Date randomThoiGian(int i) {
 		Calendar calendar = Calendar.getInstance();
-		i = i%6500;
+		i = i%6500; //Thời gian trích rút trong vòng 18 năm (6500 ngày) trở lại so với thời gian hiện tại 
 		calendar.add(Calendar.DATE, -i);
 		return calendar.getTime();
 	}
